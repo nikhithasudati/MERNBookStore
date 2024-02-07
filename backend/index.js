@@ -45,7 +45,7 @@ return response.status(200).json({
 
 catch(error){
 console.log(error.message);
-// response.status(500).send({message:"server error"})
+response.status(404).send({message:"server error"})
 }
 });
 
@@ -59,6 +59,7 @@ app.get("/:id",async(request,response) =>{
     }
     catch(error){
         console.log(error.message);
+        response.status(404).send("Resource not found");
     }
 });
 
@@ -87,6 +88,24 @@ app.put("/:id", async(request,response)=>{
     }
 });
 
+
+app.delete("/:id", async(request,response) =>{
+    try{
+        const {id} = request.params;
+        const result = await Book.findByIdAndDelete(id);
+        if(!result){
+            return response.status(400).send({message:"book not found"});
+        }
+        return response.status(200).send({message:"book deleted"});
+
+
+    }
+    catch(error){
+        console.log(error.message);
+        return response.status(400).send({message:'Error in deleting book'})
+
+    }
+});
 
 
 mongoose.connect(mongodbURL).then(() =>{
