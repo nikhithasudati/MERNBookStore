@@ -49,6 +49,19 @@ console.log(error.message);
 }
 });
 
+app.get("/:id",async(request,response) =>{
+    try{
+        const {id} = request.params;
+
+       const book = await Book.findById(id);
+       return response.status(200).json(book);
+
+    }
+    catch(error){
+        console.log(error.message);
+    }
+});
+
 
 
 
