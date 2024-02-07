@@ -62,6 +62,30 @@ app.get("/:id",async(request,response) =>{
     }
 });
 
+app.put("/:id", async(request,response)=>{
+
+    try{
+        if(
+            !request.body.title || !request.body.author || !request.body.publishYear
+        ){
+            return response.status(400).send({
+                message: 'send all required fields',
+            });
+        }
+
+        const {id} = request.params;
+
+        const result =  await Book.findByIdAndUpdate(id,request.body);
+        if(!result){
+            return response.status(400).send({message:"book not found"});
+        }
+        return response.status(200).send({message:"book updated"});
+        
+    }
+    catch(error){
+        console.log(error.message)
+    }
+});
 
 
 
