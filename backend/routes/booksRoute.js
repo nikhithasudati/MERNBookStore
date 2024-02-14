@@ -4,7 +4,7 @@ import express from "express";
 
 const router = express.Router();
 
-router.post("/books",async(request,response) =>{
+router.post("/",async(request,response) =>{
     try{
         if(
             !request.body.title || !request.body.author || !request.body.publishYear
@@ -27,7 +27,7 @@ router.post("/books",async(request,response) =>{
     }
 });
 
-router.get("/books", async(request,response) =>{
+router.get("/", async(request,response) =>{
 try{
 const books = await Book.find({});
 console.log(books);
