@@ -4,7 +4,7 @@ import express from "express";
 
 const router = express.Router();
 
-router.post("/",async(request,response) =>{
+router.post('/',async(request,response) =>{
     try{
         if(
             !request.body.title || !request.body.author || !request.body.publishYear
@@ -27,7 +27,7 @@ router.post("/",async(request,response) =>{
     }
 });
 
-router.get("/", async(request,response) =>{
+router.get('/', async(request,response) =>{
 try{
 const books = await Book.find({});
 console.log(books);
@@ -45,7 +45,7 @@ response.status(404).send({message:"server error"})
 }
 });
 
-router.get("/:id",async(request,response) =>{
+router.get('/:id',async(request,response) =>{
     try{
         const {id} = request.params;
 
@@ -59,7 +59,7 @@ router.get("/:id",async(request,response) =>{
     }
 });
 
-router.put("/:id", async(request,response)=>{
+router.put('/:id', async(request,response)=>{
 
     try{
         if(
@@ -85,7 +85,7 @@ router.put("/:id", async(request,response)=>{
 });
 
 
-router.delete("/:id", async(request,response) =>{
+router.delete('/:id', async(request,response) =>{
     try{
         const {id} = request.params;
         const result = await Book.findByIdAndDelete(id);
@@ -104,3 +104,5 @@ router.delete("/:id", async(request,response) =>{
 });
 
 export default router;
+
+
